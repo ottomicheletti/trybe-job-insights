@@ -9,5 +9,4 @@ def read(path: str):
         reader = csv.DictReader(csvfile)
         for row in reader:
             result.append(row)
-    print(result[0])
     return result
