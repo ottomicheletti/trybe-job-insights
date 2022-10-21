@@ -1,6 +1,7 @@
 import csv
 
 
+# Req 02 - Learning DictReader(), not in, and, len() and append
 def get_unique_job_types(path: str):
     result = []
     with open(path) as csvfile:
@@ -12,12 +13,7 @@ def get_unique_job_types(path: str):
     return result
 
 
-# Learning filter(), lambda and list()
-def filter_by_job_type(jobs: list, job_type: str):
-    filtered_jobs = filter(lambda job: job["job_type"] == job_type, jobs)
-    return list(filtered_jobs)
-
-
+# Req 03
 def get_unique_industries(path: str):
     result = []
     with open(path) as csvfile:
@@ -29,89 +25,68 @@ def get_unique_industries(path: str):
     return result
 
 
-def filter_by_industry(jobs, industry):
-    """Filters a list of jobs by industry
-
-    Parameters
-    ----------
-    jobs : list
-        List of jobs to be filtered
-    industry : str
-        Industry for the list filter
-
-    Returns
-    -------
-    list
-        List of jobs with provided industry
-    """
-    return []
-
-
-# First resolution using only if/else statements
-# def get_max_salary(path: str):
-#     max_salary = 0
-#     with open(path) as csvfile:
-#         reader = csv.DictReader(csvfile)
-#         for row in reader:
-#             if row["max_salary"] == "" or row["max_salary"] == "invalid":
-#                 salary = 0
-#             else:
-#                 salary = int(float(row["max_salary"]))
-#             if salary > max_salary:
-#                 max_salary = salary
-#     return max_salary
-
-# Second resolution using the max() method
+# Req 04 - Learning max(), isdigit(), int()
 def get_max_salary(path: str):
     salaries = []
     with open(path) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             max_salary = row["max_salary"]
-            if max_salary == "" or max_salary == "invalid":
-                pass
-            else:
+            if max_salary.isdigit():
                 salaries.append(int(max_salary))
     return max(salaries)
 
 
+# Req 05 - Learning min()
 def get_min_salary(path: str):
     salaries = []
     with open(path) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             min_salary = row["min_salary"]
-            if min_salary == "" or min_salary == "invalid":
-                pass
-            else:
+            if min_salary.isdigit():
                 salaries.append(int(min_salary))
     return min(salaries)
 
 
-def matches_salary_range(job, salary):
-    """Checks if a given salary is in the salary range of a given job
+# Req 06 - Learning filter(), lambda and list()
+def filter_by_job_type(jobs: list, job_type: str):
+    filtered_jobs = filter(lambda job: job["job_type"] == job_type, jobs)
+    return list(filtered_jobs)
 
-    Parameters
-    ----------
-    job : dict
-        The job with `min_salary` and `max_salary` keys
-    salary : int
-        The salary to check if matches with salary range of the job
 
-    Returns
-    -------
-    bool
-        True if the salary is in the salary range of the job, False otherwise
+# Req 07
+def filter_by_industry(jobs: list, industry: str):
+    filtered_jobs = filter(lambda job: job["industry"] == industry, jobs)
+    return list(filtered_jobs)
 
-    Raises
-    ------
-    ValueError
-        If `job["min_salary"]` or `job["max_salary"]` doesn't exists
-        If `job["min_salary"]` or `job["max_salary"]` aren't valid integers
-        If `job["min_salary"]` is greather than `job["max_salary"]`
-        If `salary` isn't a valid integer
-    """
-    pass
+
+# Req 08 - Learning keys(), raise, isinstance(), .format()
+def matches_salary_range(job: dict, salary: int):
+
+    if ("min_salary" or "max_salary") not in job.keys():
+        raise ValueError
+
+    if (
+        not isinstance(salary, int)
+        or not isinstance(job["min_salary"], int)
+        or not isinstance(job["max_salary"], int)
+    ):
+        raise ValueError
+
+    print(
+        "Min: {min}, Max: {max}, Salário: {salario}".format(
+            max=job["max_salary"], min=job["min_salary"], salario=salary
+        )
+    )
+
+    if job["min_salary"] > job["max_salary"]:
+        raise ValueError
+
+    if job["min_salary"] <= salary <= job["max_salary"]:
+        return True
+    else:
+        return False
 
 
 def filter_by_salary_range(jobs, salary):
