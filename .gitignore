@@ -30,7 +30,6 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-.vscode/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -109,7 +108,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-# .env desabilitado para reste projeto em específico
+# .env desabilitado para este projeto em específico
 .venv
 env/
 venv/
