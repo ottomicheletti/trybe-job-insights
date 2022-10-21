@@ -89,19 +89,16 @@ def matches_salary_range(job: dict, salary: int):
         return False
 
 
-def filter_by_salary_range(jobs, salary):
-    """Filters a list of jobs by salary range
-
-    Parameters
-    ----------
-    jobs : list
-        The jobs to be filtered
-    salary : int
-        The salary to be used as filter
-
-    Returns
-    -------
-    list
-        Jobs whose salary range contains `salary`
-    """
-    return []
+# Req 09 - Learning try, except and finally
+def filter_by_salary_range(jobs: list, salary: int):
+    filtered_jobs = []
+    try:
+        for job in jobs:
+            if not (
+                job["min_salary"] > job["max_salary"]
+            ) and matches_salary_range(job, salary):
+                filtered_jobs.append(job)
+    except ValueError:
+        pass
+    finally:
+        return filtered_jobs
