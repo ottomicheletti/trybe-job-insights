@@ -59,22 +59,31 @@ def filter_by_industry(jobs, industry):
     return []
 
 
-def get_max_salary(path):
-    """Get the maximum salary of all jobs
+# First resolution using only if/else statements
+# def get_max_salary(path: str):
+#     max_salary = 0
+#     with open(path) as csvfile:
+#         reader = csv.DictReader(csvfile)
+#         for row in reader:
+#             if row["max_salary"] == "" or row["max_salary"] == "invalid":
+#                 salary = 0
+#             else:
+#                 salary = int(float(row["max_salary"]))
+#             if salary > max_salary:
+#                 max_salary = salary
+#     return max_salary
 
-    Must call `read`
-
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    int
-        The maximum salary paid out of all job opportunities
-    """
-    pass
+# Second resolution using the max() method
+def get_max_salary(path: str):
+    salaries = []
+    with open(path) as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            if row["max_salary"] == "" or row["max_salary"] == "invalid":
+                pass
+            else:
+                salaries.append(int(row["max_salary"]))
+    return max(salaries)
 
 
 def get_min_salary(path):
