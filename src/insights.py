@@ -79,29 +79,25 @@ def get_max_salary(path: str):
     with open(path) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            if row["max_salary"] == "" or row["max_salary"] == "invalid":
+            max_salary = row["max_salary"]
+            if max_salary == "" or max_salary == "invalid":
                 pass
             else:
-                salaries.append(int(row["max_salary"]))
+                salaries.append(int(max_salary))
     return max(salaries)
 
 
-def get_min_salary(path):
-    """Get the minimum salary of all jobs
-
-    Must call `read`
-
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    int
-        The minimum salary paid out of all job opportunities
-    """
-    pass
+def get_min_salary(path: str):
+    salaries = []
+    with open(path) as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            min_salary = row["min_salary"]
+            if min_salary == "" or min_salary == "invalid":
+                pass
+            else:
+                salaries.append(int(min_salary))
+    return min(salaries)
 
 
 def matches_salary_range(job, salary):
