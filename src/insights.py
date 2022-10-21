@@ -12,22 +12,10 @@ def get_unique_job_types(path: str):
     return result
 
 
-def filter_by_job_type(jobs, job_type):
-    """Filters a list of jobs by job_type
-
-    Parameters
-    ----------
-    jobs : list
-        List of jobs to be filtered
-    job_type : str
-        Job type for the list filter
-
-    Returns
-    -------
-    list
-        List of jobs with provided job_type
-    """
-    return []
+# Learning filter(), lambda and list()
+def filter_by_job_type(jobs: list, job_type: str):
+    filtered_jobs = filter(lambda job: job["job_type"] == job_type, jobs)
+    return list(filtered_jobs)
 
 
 def get_unique_industries(path: str):
