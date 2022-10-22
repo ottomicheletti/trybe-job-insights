@@ -25,27 +25,27 @@ def get_unique_industries(path: str):
     return result
 
 
-# Req 04 - Learning max(), isdigit(), int()
+# Req 04 - Learning int(), isdigit() and max()
 def get_max_salary(path: str):
-    salaries = []
     with open(path) as csvfile:
         reader = csv.DictReader(csvfile)
-        for row in reader:
-            max_salary = row["max_salary"]
-            if max_salary.isdigit():
-                salaries.append(int(max_salary))
+        salaries = [
+            int(row["max_salary"])
+            for row in reader
+            if row["max_salary"].isdigit()
+        ]
     return max(salaries)
 
 
 # Req 05 - Learning min()
 def get_min_salary(path: str):
-    salaries = []
     with open(path) as csvfile:
         reader = csv.DictReader(csvfile)
-        for row in reader:
-            min_salary = row["min_salary"]
-            if min_salary.isdigit():
-                salaries.append(int(min_salary))
+        salaries = [
+            int(row["min_salary"])
+            for row in reader
+            if row["min_salary"].isdigit()
+        ]
     return min(salaries)
 
 
